@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>yourname.com — Engineering Portfolio</title>
+<!-- BAKED PORTFOLIO DATA — auto-updated on download -->
+<div id="__pf_data__" style="display:none;position:absolute;left:-9999px" aria-hidden="true">__EMPTY__</div>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&family=Literata:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#080c14; --bg2:#0d1220; --surface:#111827; --card:#131c2e;
+  --border:#1e2d47; --border2:#243450;
+  --cyan:#22d3ee; --cyan-dim:rgba(34,211,238,.12); --cyan-glow:rgba(34,211,238,.28);
+  --amber:#f59e0b; --green:#10b981; --red:#f43f5e; --violet:#8b5cf6;
+  --text:#e2eaf8; --text2:#8fa3bf; --text3:#4a6080;
+  --ff-d:'Syne',sans-serif; --ff-m:'JetBrains Mono',monospace; --ff-b:'Literata',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--ff-b);min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* ── CANVAS ── */
+#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.3}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:90;height:62px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4rem;background:rgba(8,12,20,.88);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:var(--ff-m);font-size:.82rem;font-weight:700;color:var(--cyan);letter-spacing:.08em;text-decoration:none}
+.nav-logo span{color:var(--text3)}
+.nav-links{display:flex;align-items:center;gap:2.2rem}
+.nav-links a{font-family:var(--ff-m);font-size:.7rem;color:var(--text2);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--cyan)}
+#adminBtn{font-family:var(--ff-m);font-size:.7rem;background:transparent;border:1px solid var(--border2);color:var(--text3);padding:6px 14px;border-radius:4px;cursor:pointer;letter-spacing:.08em;transition:all .2s}
+#adminBtn:hover{border-color:var(--cyan);color:var(--cyan)}
+#adminBtn.on{border-color:var(--green);color:var(--green);background:rgba(16,185,129,.08)}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding:6rem 4rem 4rem;position:relative;z-index:1}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 400px;gap:6rem;align-items:center}
+.hero-eyebrow{font-family:var(--ff-m);font-size:.7rem;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;opacity:0;animation:fadeUp .7s .2s forwards}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--cyan)}
+.hero-name{font-family:var(--ff-d);font-size:clamp(3rem,5.5vw,5.8rem);font-weight:800;line-height:1.02;letter-spacing:-.02em;background:linear-gradient(135deg,#e2eaf8 30%,#8fa3bf 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.2rem;opacity:0;animation:fadeUp .7s .35s forwards}
+.hero-role{font-family:var(--ff-m);font-size:1rem;color:var(--cyan);font-weight:300;margin-bottom:2rem;opacity:0;animation:fadeUp .7s .5s forwards}
+.hero-bio{font-size:1.06rem;line-height:1.9;color:var(--text2);max-width:520px;opacity:0;animation:fadeUp .7s .65s forwards}
+.hero-ctas{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:2.5rem;opacity:0;animation:fadeUp .7s .8s forwards}
+.btn-p{display:inline-flex;align-items:center;gap:.4rem;background:var(--cyan);color:#080c14;padding:11px 26px;border-radius:5px;font-family:var(--ff-d);font-size:.88rem;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;letter-spacing:.02em}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--cyan-glow)}
+.btn-g{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--text);padding:11px 26px;border-radius:5px;font-family:var(--ff-d);font-size:.88rem;font-weight:600;border:1px solid var(--border2);text-decoration:none;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.btn-g:hover{border-color:var(--cyan);color:var(--cyan)}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;border-top:1px solid var(--border);padding-top:2rem;opacity:0;animation:fadeUp .7s .95s forwards}
+.stat-num{font-family:var(--ff-m);font-size:2rem;font-weight:700;color:var(--cyan);line-height:1}
+.stat-lbl{font-family:var(--ff-m);font-size:.65rem;color:var(--text3);letter-spacing:.1em;margin-top:.3rem}
+.avatar-card{opacity:0;animation:fadeUp .7s .5s forwards;position:relative}
+.avatar-frame{width:100%;aspect-ratio:1;border-radius:20px;border:1px solid var(--border2);background:var(--card);overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+.avatar-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cyan-dim),transparent 60%);pointer-events:none}
+#avatarImg{width:100%;height:100%;object-fit:cover;display:none}
+#avatarEmoji{font-size:8rem;line-height:1;user-select:none}
+.avatar-badge{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border2);border-radius:999px;padding:6px 18px;font-family:var(--ff-m);font-size:.68rem;color:var(--cyan);white-space:nowrap;display:flex;align-items:center;gap:.5rem}
+.sdot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+
+/* ── SECTIONS ── */
+.s-wrap{position:relative;z-index:1;padding:7rem 4rem;max-width:1200px;margin:0 auto}
+.s-sep{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 4rem}
+.s-eyebrow{font-family:var(--ff-m);font-size:.68rem;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
+.s-title{font-family:var(--ff-d);font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.02em}
+.s-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3.5rem;flex-wrap:wrap;gap:1rem}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.about-paras p{color:var(--text2);font-size:1.04rem;line-height:1.9;margin-bottom:1.2rem}
+.skills-label{font-family:var(--ff-m);font-size:.65rem;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:.55rem}
+.skill-pill{font-family:var(--ff-m);font-size:.73rem;padding:5px 13px;border-radius:4px;background:var(--card);border:1px solid var(--border2);color:var(--text2);display:flex;align-items:center;gap:.4rem;transition:all .2s;position:relative}
+.skill-pill:hover{border-color:var(--cyan);color:var(--cyan)}
+.skill-level{font-size:.58rem;color:var(--text3)}
+
+/* ── PROJECTS ── */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.4rem}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;position:relative}
+.proj-card:hover{transform:translateY(-5px);border-color:var(--border2);box-shadow:0 24px 48px rgba(0,0,0,.5)}
+.proj-thumb{height:185px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:3.8rem;overflow:hidden;position:relative;border-bottom:1px solid var(--border)}
+.proj-thumb img{width:100%;height:100%;object-fit:cover}
+.proj-ov{position:absolute;inset:0;background:linear-gradient(to top,var(--card),transparent 55%)}
+.proj-body{padding:1.5rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.9rem}
+.p-tag{font-family:var(--ff-m);font-size:.62rem;padding:2px 9px;border-radius:3px;border:1px solid var(--border2);color:var(--text3)}
+.p-tag.hi{border-color:var(--cyan);color:var(--cyan)}
+.proj-name{font-family:var(--ff-d);font-size:1.22rem;font-weight:700;margin-bottom:.45rem;letter-spacing:-.01em}
+.proj-desc{color:var(--text2);font-size:.88rem;line-height:1.7;margin-bottom:1.1rem}
+.proj-links{display:flex;gap:.55rem;flex-wrap:wrap}
+.plink{font-family:var(--ff-m);font-size:.68rem;padding:5px 12px;border-radius:4px;border:1px solid var(--border2);color:var(--text2);text-decoration:none;background:none;cursor:pointer;transition:all .2s}
+.plink:hover{border-color:var(--cyan);color:var(--cyan)}
+.plink.demo:hover{border-color:var(--amber);color:var(--amber)}
+.plink.code-btn:hover{border-color:var(--violet);color:var(--violet)}
+
+/* ── TIMELINE ── */
+.timeline{padding-left:1.5rem;border-left:2px solid var(--border)}
+.tl-item{position:relative;padding:0 0 3rem 2.2rem}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{position:absolute;left:-2.55rem;top:.3rem;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--cyan);box-shadow:0 0 12px var(--cyan-glow)}
+.tl-period{font-family:var(--ff-m);font-size:.68rem;color:var(--cyan);letter-spacing:.08em;margin-bottom:.35rem}
+.tl-role{font-family:var(--ff-d);font-size:1.18rem;font-weight:700;margin-bottom:.18rem}
+.tl-company{color:var(--text3);font-family:var(--ff-m);font-size:.78rem;margin-bottom:.7rem}
+.tl-desc{color:var(--text2);font-size:.93rem;line-height:1.75}
+.tl-bullets{list-style:none;margin-top:.7rem}
+.tl-bullets li{color:var(--text2);font-size:.88rem;line-height:1.7;padding:.2rem 0;display:flex;gap:.6rem}
+.tl-bullets li::before{content:'▸';color:var(--cyan);flex-shrink:0;margin-top:.05rem}
+
+/* ── CONTACT ── */
+#contact .s-wrap{text-align:center}
+.contact-card{max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:3rem;position:relative;overflow:hidden}
+.contact-card::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:var(--cyan-dim);filter:blur(60px);pointer-events:none}
+.contact-bio{color:var(--text2);font-size:1.04rem;line-height:1.8;margin-bottom:2rem}
+.c-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.7rem}
+.c-link{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--ff-m);font-size:.76rem;padding:9px 18px;border-radius:6px;border:1px solid var(--border2);color:var(--text);text-decoration:none;transition:all .2s;background:var(--surface)}
+.c-link:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;color:var(--text3);font-family:var(--ff-m);font-size:.68rem;position:relative;z-index:1}
+
+/* ── ADMIN FAB ── */
+.admin-fab{position:fixed;bottom:2rem;right:2rem;z-index:95;background:var(--card);border:1px solid var(--cyan);border-radius:12px;padding:.7rem 1.2rem;display:none;align-items:center;gap:.75rem;box-shadow:0 8px 32px rgba(34,211,238,.15);font-family:var(--ff-m);font-size:.73rem}
+.fab-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.fab-logout{background:transparent;border:1px solid var(--border2);color:var(--text2);padding:5px 12px;border-radius:4px;font-family:var(--ff-m);font-size:.67rem;cursor:pointer;transition:all .2s}
+.fab-logout:hover{border-color:var(--red);color:var(--red)}
+.fab-publish{background:var(--green);border:none;color:#080c14;padding:6px 14px;border-radius:4px;font-family:var(--ff-m);font-size:.68rem;font-weight:700;cursor:pointer;transition:all .2s}
+.fab-publish:hover{opacity:.85;transform:translateY(-1px)}
+.dl-overlay{display:none}
+
+/* ── ADMIN UI ── */
+.adm-add{display:none;align-items:center;gap:.4rem;background:transparent;border:1px dashed var(--border2);color:var(--text3);padding:7px 16px;border-radius:6px;font-family:var(--ff-m);font-size:.7rem;cursor:pointer;transition:all .2s}
+.adm-add:hover{border-color:var(--cyan);color:var(--cyan)}
+.adm-edit{display:none;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);color:var(--cyan);padding:7px 16px;border-radius:6px;font-family:var(--ff-m);font-size:.7rem;cursor:pointer;transition:all .2s}
+.adm-edit:hover{background:rgba(34,211,238,.16)}
+.card-acts{position:absolute;top:.7rem;right:.7rem;display:none;gap:.35rem;z-index:5}
+.ca{width:29px;height:29px;border-radius:5px;background:rgba(8,12,20,.93);border:1px solid var(--border2);color:var(--text2);font-size:.78rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.ca.e:hover{border-color:var(--cyan);color:var(--cyan)}
+.ca.d:hover{border-color:var(--red);color:var(--red)}
+
+/* ── MODALS ── */
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(4,8,16,.95);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem}
+.overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;width:100%;max-width:620px;max-height:92vh;overflow-y:auto;padding:2.5rem;position:relative}
+.modal h2{font-family:var(--ff-d);font-size:1.6rem;font-weight:800;margin-bottom:1.5rem}
+.fg{margin-bottom:1.15rem}
+.fg label{display:block;font-family:var(--ff-m);font-size:.65rem;color:var(--text2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.45rem}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--bg2);border:1px solid var(--border2);color:var(--text);padding:10px 13px;border-radius:6px;font-family:var(--ff-b);font-size:.94rem;outline:none;transition:border-color .2s}
+.fg input:focus,.fg textarea:focus{border-color:var(--cyan)}
+.fg textarea{resize:vertical;min-height:90px;line-height:1.7}
+.fg select{cursor:pointer}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.modal-btns{display:flex;gap:.7rem;justify-content:flex-end;margin-top:1.75rem;flex-wrap:wrap}
+.m-save{background:var(--cyan);color:#080c14;padding:10px 26px;border-radius:5px;border:none;font-family:var(--ff-d);font-weight:700;font-size:.88rem;cursor:pointer;transition:opacity .2s}
+.m-save:hover{opacity:.85}
+.m-cancel{background:transparent;color:var(--text2);padding:10px 22px;border-radius:5px;border:1px solid var(--border2);cursor:pointer;font-size:.88rem;transition:all .2s}
+.m-cancel:hover{border-color:var(--text2);color:var(--text)}
+.mclose{position:absolute;top:1.2rem;right:1.2rem;background:transparent;border:none;color:var(--text3);font-size:1.1rem;cursor:pointer;transition:color .2s;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:4px}
+.mclose:hover{color:var(--red)}
+.hint{font-family:var(--ff-m);font-size:.65rem;color:var(--text3);margin-top:.4rem}
+.err{color:var(--red);font-family:var(--ff-m);font-size:.7rem;min-height:1.1em;margin-bottom:.5rem}
+.img-prev{width:100%;height:155px;border-radius:8px;background:var(--bg2);border:1px dashed var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:.5rem;font-size:2.5rem;color:var(--text3);cursor:pointer;transition:border-color .2s;position:relative;flex-direction:column;gap:.4rem}
+.img-prev:hover{border-color:var(--cyan)}
+.img-prev img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.img-prev-txt{font-family:var(--ff-m);font-size:.68rem;color:var(--text3);z-index:1}
+.img-prev .change-lbl{position:absolute;bottom:.5rem;right:.5rem;font-family:var(--ff-m);font-size:.6rem;background:rgba(8,12,20,.85);color:var(--cyan);padding:2px 8px;border-radius:3px;z-index:2}
+
+/* ── EMPTY STATE ── */
+.empty{grid-column:1/-1;text-align:center;padding:4rem;color:var(--text3);font-family:var(--ff-m);font-size:.82rem;border:1px dashed var(--border);border-radius:12px}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:6.5rem;left:50%;transform:translateX(-50%);background:var(--green);color:#080c14;padding:9px 24px;border-radius:6px;font-family:var(--ff-m);font-size:.8rem;font-weight:700;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s,transform .65s}
+.reveal.in{opacity:1;transform:none}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
+
+/* ── CODE VIEW ── */
+.code-modal-wrap{position:fixed;inset:0;z-index:300;background:rgba(4,8,16,.97);display:flex;align-items:center;justify-content:center;padding:1rem}
+.code-modal{background:#0d1220;border:1px solid var(--border2);border-radius:14px;padding:2rem;max-width:720px;width:100%;max-height:82vh;overflow-y:auto}
+.code-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem}
+.code-modal pre{font-family:var(--ff-m);font-size:.8rem;color:var(--text);line-height:1.75;white-space:pre-wrap;word-break:break-word}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  #nav{padding:0 1.5rem}
+  #hero{padding:5rem 1.5rem 3rem}
+  .hero-inner{grid-template-columns:1fr}
+  .avatar-card{display:none}
+  .s-wrap{padding:5rem 1.5rem}
+  .s-sep{margin:0 1.5rem}
+  .about-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:.5rem;text-align:center;padding:1.5rem}
+  .nav-links a{display:none}
+  .fg-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#hero">yourname<span>.com</span></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+    <button id="adminBtn" onclick="handleAdminBtn()" style="display:none">⚙ Admin</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow" id="hEyebrow">Engineer &amp; Developer</div>
+      <h1 class="hero-name" id="hName">Your Name</h1>
+      <div class="hero-role" id="hRole">// Full Stack Engineer</div>
+      <p class="hero-bio" id="hBio">Passionate engineer building scalable, high-performance systems. Focused on clean architecture, elegant code, and products that genuinely make an impact.</p>
+      <div class="hero-ctas">
+        <a class="btn-p" href="#projects">View Projects</a>
+        <a class="btn-g" href="#contact">Get in Touch</a>
+        <a class="btn-g" id="resumeBtn" href="#" target="_blank" style="display:none">📄 Resume</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num" id="sProjects">0</div><div class="stat-lbl">Projects</div></div>
+        <div><div class="stat-num" id="sYears">0+</div><div class="stat-lbl">Yrs Experience</div></div>
+        <div><div class="stat-num" id="sSkills">0</div><div class="stat-lbl">Technologies</div></div>
+      </div>
+      <div style="margin-top:1.5rem">
+        <button class="adm-edit" id="heroEditBtn" onclick="openHeroModal()">✏ Edit Profile</button>
+      </div>
+    </div>
+    <div class="avatar-card">
+      <div class="avatar-frame">
+        <span id="avatarEmoji">👨‍💻</span>
+        <img id="avatarImg" src="" alt="Profile">
+      </div>
+      <div class="avatar-badge"><span class="sdot"></span><span id="badgeText">Open to work</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="s-sep reveal"></div>
+
+<!-- ABOUT -->
+<div id="about">
+<div class="s-wrap reveal">
+  <div class="s-head">
+    <div><div class="s-eyebrow">About Me</div><h2 class="s-title">Who I Am</h2></div>
+    <button class="adm-edit" onclick="openAboutModal()">✏ Edit About</button>
+  </div>
+  <div class="about-grid">
+    <div class="about-paras" id="aboutParas"></div>
+    <div>
+      <div class="skills-label">Tech Stack &amp; Skills</div>
+      <div class="skills-wrap" id="skillsWrap"></div>
+      <div style="margin-top:1.1rem">
+        <button class="adm-add" onclick="openSkillModal(-1)">+ Add Skill</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="s-sep reveal"></div>
+
+<!-- PROJECTS -->
+<div id="projects">
+<div class="s-wrap reveal">
+  <div class="s-head">
+    <div><div class="s-eyebrow">Work</div><h2 class="s-title">Projects</h2></div>
+    <button class="adm-add" onclick="openProjectModal(-1)">+ Add Project</button>
+  </div>
+  <div class="proj-grid" id="projGrid"></div>
+</div>
+</div>
+
+<div class="s-sep reveal"></div>
+
+<!-- EXPERIENCE -->
+<div id="experience">
+<div class="s-wrap reveal">
+  <div class="s-head">
+    <div><div class="s-eyebrow">Career</div><h2 class="s-title">Experience</h2></div>
+    <button class="adm-add" onclick="openExpModal(-1)">+ Add Role</button>
+  </div>
+  <div class="timeline" id="timeline"></div>
+</div>
+</div>
+
+<div class="s-sep reveal"></div>
+
+<!-- CONTACT -->
+<div id="contact">
+<div class="s-wrap reveal" style="text-align:center">
+  <div class="s-eyebrow" style="justify-content:center;display:flex">Contact</div>
+  <h2 class="s-title" style="margin-bottom:2.5rem">Get in Touch</h2>
+  <div class="contact-card">
+    <p class="contact-bio" id="contactBio"></p>
+    <div class="c-links" id="cLinks"></div>
+    <div style="margin-top:1.5rem">
+      <button class="adm-edit" onclick="openContactModal()" style="margin:0 auto">✏ Edit Contact</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span id="footerName">yourname.com</span>
+  <span style="color:var(--border2)">Designed &amp; Built with passion · <span id="fyear"></span></span>
+  <span>yourname<span style="color:var(--cyan)">.com</span></span>
+</footer>
+
+<!-- ADMIN FAB -->
+<div class="admin-fab" id="adminFab">
+  <span class="fab-dot"></span>
+  <span style="color:var(--green)">Admin Mode</span>
+  <button class="fab-publish" onclick="openGhModal()">🌐 Publish Live</button>
+  <button class="fab-download" onclick="downloadPortfolio()">⬇ Download</button>
+  <button class="fab-logout" onclick="doLogout()">Logout</button>
+</div>
+
+<!-- PUBLISH STATUS BAR -->
+<div id="publishBar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:96;background:var(--surface);border-top:1px solid var(--border2);padding:.6rem 2rem;font-family:var(--ff-m);font-size:.75rem;display:none;align-items:center;gap:.75rem;justify-content:center">
+  <span id="publishBarMsg" style="color:var(--cyan)"></span>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- ════════════════════════ MODALS ════════════════════════ -->
+
+<!-- GITHUB PUBLISH MODAL -->
+<div class="overlay" id="ghOv">
+  <div class="modal" style="max-width:560px">
+    <button class="mclose" onclick="closeOv('ghOv')">✕</button>
+    <h2>🌐 Publish Live to GitHub</h2>
+    <p style="color:var(--text2);font-size:.88rem;line-height:1.75;margin-bottom:1.5rem">
+      Enter your GitHub details once. Every time you click <strong style="color:var(--cyan)">Publish Live</strong>, your changes go live automatically — no download or upload needed.
+    </p>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1.4rem">
+      <div style="font-family:var(--ff-m);font-size:.68rem;color:var(--amber);letter-spacing:.1em;margin-bottom:.6rem">⚡ ONE-TIME SETUP</div>
+      <div style="font-family:var(--ff-m);font-size:.72rem;color:var(--text2);line-height:1.9">
+        1. Go to <span style="color:var(--cyan)">github.com → Settings → Developer settings</span><br>
+        2. Click <span style="color:var(--cyan)">Personal access tokens → Tokens (classic)</span><br>
+        3. Click <span style="color:var(--cyan)">Generate new token (classic)</span><br>
+        4. Give it a name, tick <span style="color:var(--cyan)">repo</span> checkbox → Generate<br>
+        5. Copy the token and paste below ↓
+      </div>
+    </div>
+
+    <div class="fg-row">
+      <div class="fg"><label>GitHub Username</label><input id="gh_user" placeholder="e.g. thejas-macro"></div>
+      <div class="fg"><label>Repository Name</label><input id="gh_repo" placeholder="e.g. Thejas-Umesh-Poojary.github.io"></div>
+    </div>
+    <div class="fg">
+      <label>Personal Access Token</label>
+      <input type="password" id="gh_token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      <p class="hint">🔒 Stored only in your browser — never uploaded to GitHub</p>
+    </div>
+    <div class="fg"><label>File Path in Repo</label><input id="gh_path" placeholder="index.html" value="index.html"></div>
+
+    <div id="ghStatus" style="display:none;font-family:var(--ff-m);font-size:.78rem;padding:.75rem 1rem;border-radius:6px;margin-bottom:.75rem"></div>
+
+    <div class="modal-btns">
+      <button class="m-cancel" onclick="closeOv('ghOv')">Cancel</button>
+      <button class="m-save" id="ghSaveBtn" onclick="saveGhSettings()">Save Settings</button>
+      <button class="m-save" id="ghPublishBtn" onclick="publishToGitHub()" style="background:var(--green);display:none">🌐 Publish Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="overlay" id="loginOv">
+  <div class="modal" style="max-width:420px">
+    <button class="mclose" onclick="closeOv('loginOv')">✕</button>
+    <h2>Admin Login</h2>
+    <p style="color:var(--text2);font-size:.9rem;margin-bottom:1.4rem">Enter your password to enable editing.</p>
+    <div class="fg">
+      <label>Password</label>
+      <input type="password" id="lPwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="err" id="lErr"></div>
+    <div class="modal-btns">
+      <button class="m-cancel" onclick="closeOv('loginOv')">Cancel</button>
+      <button class="m-save" onclick="doLogin()">Login</button>
+    </div>
+    <p style="color:var(--text3);font-size:.65rem;font-family:var(--ff-m);margin-top:1rem;text-align:center">Default password: <span style="color:var(--cyan)">admin123</span> · Change in Hero settings</p>
+  </div>
+</div>
+
+<!-- HERO EDIT -->
+<div class="overlay" id="heroOv">
+  <div class="modal">
+    <button class="mclose" onclick="closeOv('heroOv')">✕</button>
+    <h2>Edit Profile &amp; Hero</h2>
+    <div class="fg-row">
+      <div class="fg"><label>Full Name</label><input id="h_name" placeholder="e.g. Arjun Sharma"></div>
+      <div class="fg"><label>Eyebrow Tag</label><input id="h_tag" placeholder="e.g. Engineer & Developer"></div>
+    </div>
+    <div class="fg"><label>Role / Title</label><input id="h_role" placeholder="e.g. // Full Stack Engineer"></div>
+    <div class="fg"><label>Hero Bio</label><textarea id="h_bio"></textarea></div>
+    <div class="fg-row">
+      <div class="fg"><label>Status Badge Text</label><input id="h_badge" placeholder="Open to work"></div>
+      <div class="fg"><label>Years of Experience</label><input id="h_years" type="text" placeholder="3+"></div>
+    </div>
+    <div class="fg">
+      <label>Profile Photo — click to upload</label>
+      <div class="img-prev" id="heroPrev" onclick="pickImg('heroFile','heroPrev','heroImgData')">
+        <span>📷</span><span class="img-prev-txt">Click to upload photo</span>
+      </div>
+      <input type="file" id="heroFile" accept="image/*" style="display:none" onchange="onImgFile(this,'heroPrev','heroImgData')">
+      <input type="hidden" id="heroImgData">
+      <p class="hint">Or paste image URL: <input id="h_avatarUrl" placeholder="https://..." style="width:auto;display:inline;padding:3px 8px;font-size:.72rem;margin-left:.4rem"></p>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Avatar Emoji (if no photo)</label><input id="h_emoji" placeholder="👨‍💻"></div>
+      <div class="fg"><label>Resume URL</label><input id="h_resume" placeholder="https://drive.google.com/..."></div>
+    </div>
+    <div class="fg"><label>Change Admin Password (min 4 chars, leave blank to keep)</label><input type="password" id="h_pwd" placeholder="New password..."></div>
+    <div class="modal-btns">
+      <button class="m-cancel" onclick="closeOv('heroOv')">Cancel</button>
+      <button class="m-save" onclick="saveHero()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT EDIT -->
+<div class="overlay" id="aboutOv">
+  <div class="modal">
+    <button class="mclose" onclick="closeOv('aboutOv')">✕</button>
+    <h2>Edit About</h2>
+    <div class="fg">
+      <label>About Text (leave a blank line between paragraphs)</label>
+      <textarea id="a_text" style="min-height:220px;line-height:1.75"></textarea>
+    </div>
+    <div class="modal-btns">
+      <button class="m-cancel" onclick="closeOv('aboutOv')">Cancel</button>
+      <button class="m-save" onclick="saveAbout()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- SKILL -->
+<div class="overlay" id="skillOv">
+  <div class="modal" style="max-width:440px">
+    <button class="mclose" onclick="closeOv('skillOv')">✕</button>
+    <h2 id="skillTitle">Add Skill</h2>
+    <div class="fg"><label>Skill / Technology</label><input id="sk_name" placeholder="e.g. Kubernetes, React, C++"></div>
+    <div class="fg"><label>Proficiency Level</label>
+      <select id="sk_level">
+        <option value="Expert">Expert</option>
+        <option value="Advanced">Advanced</option>
+        <option value="Intermediate" selected>Intermediate</option>
+        <option value="Learning">Learning</option>
+      </select>
+    </div>
+    <div class="modal-btns">
+      <button class="m-cancel" onclick="closeOv('skillOv')">Cancel</button>
+      <button class="m-save" onclick="saveSkill()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT -->
+<div class="overlay" id="projOv">
+  <div class="modal">
+    <button class="mclose" onclick="closeOv('projOv')">✕</button>
+    <h2 id="projTitle">Add Project</h2>
+    <div class="fg"><label>Project Name</label><input id="p_name" placeholder="e.g. Smart Grid Monitor"></div>
+    <div class="fg"><label>Description</label><textarea id="p_desc" placeholder="What it does, key achievements, impact..."></textarea></div>
+    <div class="fg-row">
+      <div class="fg"><label>Tags / Tech (comma-separated)</label><input id="p_tags" placeholder="Python, ML, FastAPI"></div>
+      <div class="fg"><label>Status Badge</label>
+        <select id="p_status">
+          <option value="">None</option>
+          <option value="Live">Live</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Open Source">Open Source</option>
+          <option value="Research">Research</option>
+          <option value="Archived">Archived</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Cover Image — click to upload</label>
+      <div class="img-prev" id="projPrev" onclick="pickImg('projFile','projPrev','projImgData')">
+        <span>🖼️</span><span class="img-prev-txt">Click to upload cover image</span>
+      </div>
+      <input type="file" id="projFile" accept="image/*" style="display:none" onchange="onImgFile(this,'projPrev','projImgData')">
+      <input type="hidden" id="projImgData">
+      <p class="hint">Or paste URL: <input id="p_imgUrl" placeholder="https://..." style="width:auto;display:inline;padding:3px 8px;font-size:.72rem;margin-left:.4rem"></p>
+    </div>
+    <div class="fg"><label>Project Emoji (if no image)</label><input id="p_emoji" placeholder="⚡"></div>
+    <div class="fg-row">
+      <div class="fg"><label>GitHub URL</label><input id="p_github" placeholder="https://github.com/..."></div>
+      <div class="fg"><label>Live Demo URL</label><input id="p_demo" placeholder="https://..."></div>
+    </div>
+    <div class="fg">
+      <label>Code Snippet (optional — displayed in a popup)</label>
+      <textarea id="p_code" style="font-family:var(--ff-m);font-size:.77rem;min-height:110px" placeholder="# Paste key code snippet here..."></textarea>
+    </div>
+    <div class="modal-btns">
+      <button class="m-cancel" onclick="closeOv('projOv')">Cancel</button>
+      <button class="m-save" onclick="saveProject()">Save Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="overlay" id="expOv">
+  <div class="modal">
+    <button class="mclose" onclick="closeOv('expOv')">✕</button>
+    <h2 id="expTitle">Add Experience</h2>
+    <div class="fg-row">
+      <div class="fg"><label>Role / Position</label><input id="e_role" placeholder="Software Engineer"></div>
+      <div class="fg"><label>Company / Organization</label><input id="e_company" placeholder="Infosys"></div>
+    </div>
+    <div class="fg"><label>Period</label><input id="e_period" placeholder="Jan 2022 — Present"></div>
+    <div class="fg"><label>Brief Description</label><textarea id="e_desc" placeholder="Overview of the role and responsibilities..."></textarea></div>
+    <div class="fg">
+      <label>Key Achievements (one per line)</label>
+      <textarea id="e_bullets" style="min-height:130px" placeholder="Reduced API latency by 40% using Redis&#10;Led team of 4 engineers&#10;Built CI/CD pipeline with GitHub Actions"></textarea>
+    </div>
+    <div class="modal-btns">
+      <button class="m-cancel" onclick="closeOv('expOv')">Cancel</button>
+      <button class="m-save" onclick="saveExp()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT EDIT -->
+<div class="overlay" id="contactOv">
+  <div class="modal">
+    <button class="mclose" onclick="closeOv('contactOv')">✕</button>
+    <h2>Edit Contact</h2>
+    <div class="fg"><label>Contact Bio</label><textarea id="c_bio"></textarea></div>
+    <div class="fg-row">
+      <div class="fg"><label>Email</label><input id="c_email" type="email" placeholder="you@email.com"></div>
+      <div class="fg"><label>Phone (optional)</label><input id="c_phone" placeholder="+91 9876543210"></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>GitHub URL</label><input id="c_github" placeholder="https://github.com/..."></div>
+      <div class="fg"><label>LinkedIn URL</label><input id="c_linkedin" placeholder="https://linkedin.com/in/..."></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Twitter / X URL</label><input id="c_twitter" placeholder="https://twitter.com/..."></div>
+      <div class="fg"><label>Location</label><input id="c_location" placeholder="Bangalore, India"></div>
+    </div>
+    <div class="modal-btns">
+      <button class="m-cancel" onclick="closeOv('contactOv')">Cancel</button>
+      <button class="m-save" onclick="saveContact()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ JS ════════════════════════ -->
+<script>
+/* ── CANVAS BG ── */
+(function(){
+  const c=document.getElementById('bgCanvas'),ctx=c.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;init()}
+  function init(){
+    pts=[];
+    for(let i=0,n=Math.floor(W*H/20000);i<n;i++)
+      pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.4+.4});
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(34,211,238,.45)';ctx.fill();
+    });
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<140){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(34,211,238,${.1*(1-d/140)})`;ctx.lineWidth=.5;ctx.stroke();}
+    }
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize',resize);resize();draw();
+})();
+
+/* ── DATA STORE ── */
+const SK='eng_pf_v4';
+/*%%DATABLOCK_START%%*/
+const DEF={
+  pwd:'admin123',
+  hero:{name:'Your Name',tag:'Engineer & Developer',role:'// Full Stack Engineer',bio:'Passionate engineer building scalable, high-performance systems. Focused on clean architecture, elegant code, and products that genuinely make an impact.',badge:'Open to work',years:'3+',emoji:'👨‍💻',avatarUrl:'',avatarData:'',resume:''},
+  about:'I am a software engineer passionate about building elegant and efficient systems. My work spans from low-level system design to full-stack web applications, always prioritising clean code and real-world impact.\n\nI thrive in collaborative, fast-paced environments — architecting solutions that are both performant and maintainable. My approach blends engineering rigour with creative problem-solving.',
+  skills:[{name:'Python',level:'Expert'},{name:'JavaScript',level:'Advanced'},{name:'React',level:'Advanced'},{name:'Node.js',level:'Advanced'},{name:'C++',level:'Intermediate'},{name:'Docker',level:'Intermediate'},{name:'PostgreSQL',level:'Advanced'},{name:'AWS',level:'Intermediate'}],
+  projects:[{name:'Smart Grid Monitor',desc:'Real-time power grid monitoring with ML-based anomaly detection and automated alert pipeline. Reduced incident response time by 60%.',tags:'Python, TensorFlow, FastAPI, React',status:'Live',imgUrl:'',imgData:'',emoji:'⚡',github:'https://github.com',demo:'',code:'# Anomaly detection core\nif abs(z_score(reading)) > THRESHOLD:\n    trigger_alert(node_id, reading)\n    log_anomaly(timestamp, reading)'}],
+  experience:[{role:'Software Engineer',company:'TechCorp Pvt. Ltd.',period:'2022 — Present',desc:'Designed and maintained microservices powering a high-traffic fintech platform serving 2M+ users.',bullets:'Reduced API response time by 40% via Redis caching\nBuilt CI/CD pipeline with GitHub Actions & Docker\nLed code reviews for a team of 4 engineers\nMigrated monolith to microservices architecture'}],
+  contact:{bio:'Open to new opportunities, collaborations, and interesting conversations. Feel free to reach out — I reply within 24 hours.',email:'you@email.com',phone:'',github:'https://github.com',linkedin:'https://linkedin.com',twitter:'',location:'India'}
+};
+let DATA=JSON.parse(JSON.stringify(DEF));
+/*%%DATABLOCK_END%%*/
+let isAdmin=false;
+let eIdx={skill:-1,proj:-1,exp:-1};
+
+function load(){
+  try{
+    // PRIMARY: read base64-encoded data from hidden div (baked at download time)
+    const div=document.getElementById('__pf_data__');
+    if(div){
+      const raw=(div.textContent||div.innerText||'').trim();
+      if(raw && raw!=='__EMPTY__'){
+        const b=JSON.parse(decodeURIComponent(atob(raw)));
+        if(b && b.hero && b.hero.name){DATA=b;return;}
+      }
+    }
+  }catch(e){}
+  try{
+    // FALLBACK: localStorage for edits on this browser
+    const r=localStorage.getItem(SK);
+    if(r){const d=JSON.parse(r);if(d&&d.hero)DATA=d;}
+  }catch(e){}
+}
+function persist(){localStorage.setItem(SK,JSON.stringify(DATA));}
+
+/* ── RENDER ── */
+function renderAll(){renderHero();renderAbout();renderSkills();renderProjects();renderExp();renderContact();renderAdminUI();}
+
+function renderHero(){
+  const h=DATA.hero;
+  set('hEyebrow',h.tag);set('hName',h.name);set('hRole',h.role);set('hBio',h.bio);
+  set('badgeText',h.badge);
+  const nl=document.querySelector('.nav-logo');if(nl)nl.innerHTML=esc(h.name).toLowerCase().replace(/\s+/g,'')+'<span>.com</span>';
+  const fn=gid('footerName');if(fn)fn.innerHTML=esc(h.name).toLowerCase().replace(/\s+/g,'')+`<span style="color:var(--cyan)">.com</span>`;
+  set('sYears',h.years||'0+');set('sProjects',DATA.projects.length);set('sSkills',DATA.skills.length);
+  const img=document.getElementById('avatarImg'),em=document.getElementById('avatarEmoji');
+  const src=h.avatarData||h.avatarUrl;
+  if(src){img.src=src;img.style.display='block';em.style.display='none';}
+  else{img.style.display='none';em.style.display='block';em.textContent=h.emoji||'👨‍💻';}
+  const rb=document.getElementById('resumeBtn');
+  if(h.resume){rb.style.display='inline-flex';rb.href=h.resume;}else rb.style.display='none';
+}
+
+function renderAbout(){
+  const el=document.getElementById('aboutParas');el.innerHTML='';
+  DATA.about.split(/\n\n+/).filter(p=>p.trim()).forEach(p=>{
+    const d=document.createElement('p');d.textContent=p.trim();el.appendChild(d);
+  });
+}
+
+function renderSkills(){
+  const w=document.getElementById('skillsWrap');w.innerHTML='';
+  DATA.skills.forEach((sk,i)=>{
+    const pill=document.createElement('div');pill.className='skill-pill';
+    pill.innerHTML=`<span>${esc(sk.name)}</span><span class="skill-level">${esc(sk.level)}</span>`;
+    if(isAdmin){
+      const eb=mkBtn('✏','background:none;border:none;color:var(--cyan);cursor:pointer;font-size:.68rem;margin-left:.25rem;padding:0;line-height:1',()=>openSkillModal(i));
+      const db=mkBtn('✕','background:none;border:none;color:var(--red);cursor:pointer;font-size:.68rem;padding:0;line-height:1',()=>{if(confirm('Delete skill?')){DATA.skills.splice(i,1);persist();renderSkills();set('sSkills',DATA.skills.length);showToast('Skill deleted');}});
+      pill.appendChild(eb);pill.appendChild(db);
+    }
+    w.appendChild(pill);
+  });
+}
+
+function renderProjects(){
+  const g=document.getElementById('projGrid');g.innerHTML='';
+  if(!DATA.projects.length){g.innerHTML='<div class="empty">No projects yet. Click "+ Add Project" to get started.</div>';return;}
+  DATA.projects.forEach((p,i)=>{
+    const card=document.createElement('div');card.className='proj-card';
+    const tags=p.tags.split(',').map(t=>t.trim()).filter(Boolean);
+    const src=p.imgData||p.imgUrl;
+    const thumb=src?`<img src="${src}" alt="${esc(p.name)}">`:`<span>${esc(p.emoji||'🖥️')}</span>`;
+    card.innerHTML=`
+      <div class="card-acts" style="${isAdmin?'display:flex':'display:none'}">
+        <button class="ca e" title="Edit" onclick="openProjectModal(${i})">✏</button>
+        <button class="ca d" title="Delete" onclick="delProj(${i})">✕</button>
+      </div>
+      <div class="proj-thumb">${thumb}<div class="proj-ov"></div></div>
+      <div class="proj-body">
+        <div class="proj-tags">
+          ${p.status?`<span class="p-tag hi">${esc(p.status)}</span>`:''}
+          ${tags.map(t=>`<span class="p-tag">${esc(t)}</span>`).join('')}
+        </div>
+        <div class="proj-name">${esc(p.name)}</div>
+        <div class="proj-desc">${esc(p.desc)}</div>
+        <div class="proj-links">
+          ${p.github?`<a class="plink" href="${esc(p.github)}" target="_blank">⬡ GitHub</a>`:''}
+          ${p.demo?`<a class="plink demo" href="${esc(p.demo)}" target="_blank">↗ Live Demo</a>`:''}
+          ${p.code?`<button class="plink code-btn" onclick="showCode(${i})">{ } Code</button>`:''}
+        </div>
+      </div>`;
+    g.appendChild(card);
+  });
+}
+
+function renderExp(){
+  const tl=document.getElementById('timeline');tl.innerHTML='';
+  if(!DATA.experience.length){tl.innerHTML='<div class="empty" style="margin-left:0;border-radius:8px">No experience entries yet.</div>';return;}
+  DATA.experience.forEach((e,i)=>{
+    const item=document.createElement('div');item.className='tl-item';
+    const buls=e.bullets?e.bullets.split('\n').filter(b=>b.trim()).map(b=>`<li>${esc(b.trim())}</li>`).join(''):'';
+    item.innerHTML=`
+      <div class="tl-dot"></div>
+      ${isAdmin?`<div style="position:absolute;top:0;right:0;display:flex;gap:.35rem">
+        <button class="ca e" onclick="openExpModal(${i})">✏</button>
+        <button class="ca d" onclick="delExp(${i})">✕</button>
+      </div>`:'' }
+      <div class="tl-period">${esc(e.period)}</div>
+      <div class="tl-role">${esc(e.role)}</div>
+      <div class="tl-company">${esc(e.company)}</div>
+      <div class="tl-desc">${esc(e.desc)}</div>
+      ${buls?`<ul class="tl-bullets">${buls}</ul>`:''}`;
+    tl.appendChild(item);
+  });
+}
+
+function renderContact(){
+  const c=DATA.contact;
+  set('contactBio',c.bio);
+  const links=document.getElementById('cLinks');links.innerHTML='';
+  [
+    {show:!!c.email,label:c.email,href:`mailto:${c.email}`,icon:'✉'},
+    {show:!!c.phone,label:c.phone,href:`tel:${c.phone}`,icon:'📞'},
+    {show:!!c.github,label:'GitHub',href:c.github,icon:'⬡'},
+    {show:!!c.linkedin,label:'LinkedIn',href:c.linkedin,icon:'in'},
+    {show:!!c.twitter,label:'Twitter',href:c.twitter,icon:'𝕏'},
+    {show:!!c.location,label:c.location,href:'#',icon:'📍'},
+  ].filter(it=>it.show).forEach(it=>{
+    const a=document.createElement('a');
+    a.className='c-link';a.href=it.href;
+    if(it.href!=='#')a.target='_blank';
+    a.innerHTML=`<span>${it.icon}</span>${esc(it.label)}`;
+    links.appendChild(a);
+  });
+}
+
+function renderAdminUI(){
+  document.querySelectorAll('.adm-add,.adm-edit').forEach(el=>el.style.display=isAdmin?'inline-flex':'none');
+}
+
+/* ── AUTH ── */
+function handleAdminBtn(){
+  if(isAdmin){doLogout();}
+  else{gid('lPwd').value='';gid('lErr').textContent='';openOv('loginOv');}
+}
+function doLogin(){
+  if(gid('lPwd').value===DATA.pwd){
+    isAdmin=true;closeOv('loginOv');
+    gid('adminBtn').classList.add('on');gid('adminBtn').textContent='✕ Exit Admin';
+    gid('adminFab').style.display='flex';
+    renderAll();showToast('Admin mode enabled ✓');
+  }else{gid('lErr').textContent='Incorrect password.';}
+}
+function doLogout(){
+  isAdmin=false;
+  gid('adminBtn').classList.remove('on');gid('adminBtn').textContent='⚙ Admin';
+  gid('adminFab').style.display='none';
+  renderAll();showToast('Logged out');
+}
+
+/* ── HERO MODAL ── */
+function openHeroModal(){
+  const h=DATA.hero;
+  fill('h_name',h.name);fill('h_tag',h.tag);fill('h_role',h.role);fill('h_bio',h.bio);
+  fill('h_badge',h.badge);fill('h_years',h.years||'');fill('h_emoji',h.emoji||'👨‍💻');
+  fill('h_avatarUrl',h.avatarUrl||'');fill('h_resume',h.resume||'');fill('h_pwd','');
+  gid('heroImgData').value=h.avatarData||'';
+  const prev=gid('heroPrev');
+  const src=h.avatarData||h.avatarUrl;
+  if(src){prev.innerHTML=`<img src="${src}" alt=""><span class="change-lbl">Change</span>`;}
+  else{prev.innerHTML='<span>📷</span><span class="img-prev-txt">Click to upload photo</span>';}
+  openOv('heroOv');
+}
+function saveHero(){
+  const h=DATA.hero;
+  h.name=val('h_name')||h.name;h.tag=val('h_tag')||h.tag;
+  h.role=val('h_role')||h.role;h.bio=val('h_bio')||h.bio;
+  h.badge=val('h_badge')||h.badge;h.years=val('h_years')||h.years;
+  h.emoji=val('h_emoji')||h.emoji;h.resume=val('h_resume');
+  const imgData=gid('heroImgData').value;const imgUrl=val('h_avatarUrl');
+  if(imgData){h.avatarData=imgData;h.avatarUrl='';}
+  else if(imgUrl){h.avatarUrl=imgUrl;h.avatarData='';}
+  const np=val('h_pwd');if(np.length>=4)DATA.pwd=np;
+  persist();renderHero();closeOv('heroOv');showToast('Profile saved ✓');
+}
+
+/* ── ABOUT MODAL ── */
+function openAboutModal(){fill('a_text',DATA.about);openOv('aboutOv');}
+function saveAbout(){DATA.about=gid('a_text').value;persist();renderAbout();closeOv('aboutOv');showToast('About saved ✓');}
+
+/* ── SKILL MODAL ── */
+function openSkillModal(idx){
+  eIdx.skill=idx;
+  set('skillTitle',idx===-1?'Add Skill':'Edit Skill');
+  if(idx>=0){fill('sk_name',DATA.skills[idx].name);gid('sk_level').value=DATA.skills[idx].level;}
+  else{fill('sk_name','');gid('sk_level').value='Intermediate';}
+  openOv('skillOv');
+}
+function saveSkill(){
+  const name=val('sk_name'),level=gid('sk_level').value;
+  if(!name)return;
+  if(eIdx.skill>=0)DATA.skills[eIdx.skill]={name,level};
+  else DATA.skills.push({name,level});
+  persist();renderSkills();set('sSkills',DATA.skills.length);closeOv('skillOv');showToast('Skill saved ✓');
+}
+
+/* ── PROJECT MODAL ── */
+function openProjectModal(idx){
+  eIdx.proj=idx;
+  set('projTitle',idx===-1?'Add Project':'Edit Project');
+  const p=idx>=0?DATA.projects[idx]:{name:'',desc:'',tags:'',status:'',imgUrl:'',imgData:'',emoji:'',github:'',demo:'',code:''};
+  fill('p_name',p.name);fill('p_desc',p.desc);fill('p_tags',p.tags);
+  gid('p_status').value=p.status||'';
+  fill('p_imgUrl',p.imgUrl||'');gid('projImgData').value=p.imgData||'';
+  fill('p_emoji',p.emoji||'');fill('p_github',p.github||'');fill('p_demo',p.demo||'');fill('p_code',p.code||'');
+  const prev=gid('projPrev');
+  const src=p.imgData||p.imgUrl;
+  if(src){prev.innerHTML=`<img src="${src}" alt=""><span class="change-lbl">Change</span>`;}
+  else{prev.innerHTML='<span>🖼️</span><span class="img-prev-txt">Click to upload cover image</span>';}
+  openOv('projOv');
+}
+function saveProject(){
+  const imgData=gid('projImgData').value,imgUrl=val('p_imgUrl');
+  const obj={
+    name:val('p_name'),desc:val('p_desc'),tags:val('p_tags'),
+    status:gid('p_status').value,emoji:val('p_emoji'),
+    imgData:imgData||'',imgUrl:imgData?'':imgUrl,
+    github:val('p_github'),demo:val('p_demo'),code:val('p_code')
+  };
+  if(!obj.name)return;
+  if(eIdx.proj>=0)DATA.projects[eIdx.proj]=obj;else DATA.projects.push(obj);
+  persist();renderProjects();set('sProjects',DATA.projects.length);closeOv('projOv');showToast('Project saved ✓');
+}
+function delProj(i){if(confirm('Delete this project?')){DATA.projects.splice(i,1);persist();renderProjects();set('sProjects',DATA.projects.length);showToast('Project deleted');}}
+
+/* ── EXP MODAL ── */
+function openExpModal(idx){
+  eIdx.exp=idx;
+  set('expTitle',idx===-1?'Add Experience':'Edit Experience');
+  const e=idx>=0?DATA.experience[idx]:{role:'',company:'',period:'',desc:'',bullets:''};
+  fill('e_role',e.role);fill('e_company',e.company);fill('e_period',e.period);
+  fill('e_desc',e.desc);fill('e_bullets',e.bullets||'');
+  openOv('expOv');
+}
+function saveExp(){
+  const obj={role:val('e_role'),company:val('e_company'),period:val('e_period'),desc:val('e_desc'),bullets:gid('e_bullets').value.trim()};
+  if(!obj.role)return;
+  if(eIdx.exp>=0)DATA.experience[eIdx.exp]=obj;else DATA.experience.push(obj);
+  persist();renderExp();closeOv('expOv');showToast('Experience saved ✓');
+}
+function delExp(i){if(confirm('Delete this entry?')){DATA.experience.splice(i,1);persist();renderExp();showToast('Entry deleted');}}
+
+/* ── CONTACT MODAL ── */
+function openContactModal(){
+  const c=DATA.contact;
+  fill('c_bio',c.bio);fill('c_email',c.email||'');fill('c_phone',c.phone||'');
+  fill('c_github',c.github||'');fill('c_linkedin',c.linkedin||'');
+  fill('c_twitter',c.twitter||'');fill('c_location',c.location||'');
+  openOv('contactOv');
+}
+function saveContact(){
+  DATA.contact={bio:val('c_bio'),email:val('c_email'),phone:val('c_phone'),github:val('c_github'),linkedin:val('c_linkedin'),twitter:val('c_twitter'),location:val('c_location')};
+  persist();renderContact();closeOv('contactOv');showToast('Contact saved ✓');
+}
+
+/* ── CODE POPUP ── */
+function showCode(i){
+  const p=DATA.projects[i];if(!p||!p.code)return;
+  const wrap=document.createElement('div');wrap.className='code-modal-wrap';
+  wrap.onclick=e=>{if(e.target===wrap)wrap.remove()};
+  wrap.innerHTML=`<div class="code-modal">
+    <div class="code-modal-head">
+      <span style="font-family:var(--ff-m);color:var(--cyan);font-size:.78rem">${esc(p.name)} — code snippet</span>
+      <button onclick="this.closest('.code-modal-wrap').remove()" style="background:none;border:none;color:var(--text2);cursor:pointer;font-size:1.15rem;line-height:1">✕</button>
+    </div>
+    <pre>${esc(p.code)}</pre>
+  </div>`;
+  document.body.appendChild(wrap);
+}
+
+/* ── IMAGE UTILS ── */
+function pickImg(fileId,prevId,dataId){document.getElementById(fileId).click();}
+function onImgFile(input,prevId,dataId){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    gid(dataId).value=e.target.result;
+    const prev=gid(prevId);
+    prev.innerHTML=`<img src="${e.target.result}" alt=""><span class="change-lbl">Change</span>`;
+  };
+  r.readAsDataURL(f);
+}
+
+/* ── OVERLAY ── */
+function openOv(id){gid(id).classList.add('open');}
+function closeOv(id){gid(id).classList.remove('open');}
+
+/* ── TOAST ── */
+function showToast(msg,duration){
+  const t=gid('toast');t.textContent=msg;t.style.opacity='1';
+  clearTimeout(showToast._t);showToast._t=setTimeout(()=>t.style.opacity='0',duration||2800);
+}
+
+/* ── HELPERS ── */
+function gid(id){return document.getElementById(id)}
+function set(id,val){const el=gid(id);if(el)el.textContent=val}
+function fill(id,val){const el=gid(id);if(el)el.value=val}
+function val(id){const el=gid(id);return el?el.value.trim():''}
+function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function mkBtn(txt,style,fn){const b=document.createElement('button');b.innerHTML=txt;b.setAttribute('style',style);b.onclick=fn;return b;}
+
+/* ── DOWNLOAD — instant, no overlay ── */
+function downloadPortfolio(){
+  try{
+    // 1. Close any open modals/overlays — they must NOT appear for visitors
+    document.querySelectorAll('.overlay.open').forEach(el=>el.classList.remove('open'));
+    document.querySelectorAll('.dl-ov.show').forEach(el=>el.classList.remove('show'));
+
+    // 2. Remove any admin hint divs injected by URL detection
+    document.querySelectorAll('.__admin_hint__').forEach(el=>el.remove());
+
+    // 2. Hide ALL admin UI elements before snapshot
+    document.querySelectorAll('.adm-add,.adm-edit,.card-acts').forEach(el=>{
+      el.setAttribute('data-was',el.style.display||'');
+      el.style.display='none';
+    });
+    const fab=gid('adminFab');if(fab)fab.style.display='none';
+    const adminBtn=gid('adminBtn');if(adminBtn)adminBtn.style.display='none';
+
+    // 3. Bake data into hidden div
+    const b64=btoa(encodeURIComponent(JSON.stringify(DATA)));
+    const div=document.getElementById('__pf_data__');
+    if(!div){showToast('❌ Data div missing');renderAdminUI();return;}
+    div.textContent=b64;
+
+    // 4. Capture clean public HTML (zero admin UI)
+    const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+
+    // 5. RESTORE admin UI immediately after snapshot
+    document.querySelectorAll('.adm-add,.adm-edit,.card-acts').forEach(el=>{
+      el.style.display=el.getAttribute('data-was')||'';
+      el.removeAttribute('data-was');
+    });
+    if(fab)fab.style.display='flex';
+    if(adminBtn)adminBtn.style.display='inline-block';
+    renderAdminUI();
+
+    // 6. Verify
+    if(html.indexOf(b64.substring(0,20))===-1){showToast('❌ Embed failed — try again');return;}
+
+    // 7. Trigger download
+    const name=((DATA.hero&&DATA.hero.name?DATA.hero.name:'portfolio')
+      .toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')||'portfolio')+'-portfolio.html';
+    const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=name;
+    document.body.appendChild(a);a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    showToast('✅ Downloaded! Rename to index.html → upload to GitHub',5000);
+
+  }catch(err){
+    console.error('Download error:',err);
+    renderAdminUI();
+    const fab=gid('adminFab');if(fab&&isAdmin)fab.style.display='flex';
+    showToast('❌ Download failed: '+err.message,4000);
+  }
+}
+
+/* ── GITHUB PUBLISH ── */
+const GH_SK='pf_gh_settings';
+
+function openGhModal(){
+  // Load saved settings
+  try{
+    const s=JSON.parse(localStorage.getItem(GH_SK)||'{}');
+    gid('gh_user').value=s.user||'';
+    gid('gh_repo').value=s.repo||'';
+    gid('gh_token').value=s.token||'';
+    gid('gh_path').value=s.path||'index.html';
+    gid('ghStatus').style.display='none';
+    // Show publish button if settings already saved
+    if(s.user&&s.repo&&s.token){
+      gid('ghPublishBtn').style.display='inline-flex';
+    } else {
+      gid('ghPublishBtn').style.display='none';
+    }
+  }catch(e){}
+  openOv('ghOv');
+}
+
+function saveGhSettings(){
+  const s={
+    user:gid('gh_user').value.trim(),
+    repo:gid('gh_repo').value.trim(),
+    token:gid('gh_token').value.trim(),
+    path:gid('gh_path').value.trim()||'index.html'
+  };
+  if(!s.user||!s.repo||!s.token){
+    ghStatus('❌ Please fill in all fields.','var(--red)');return;
+  }
+  localStorage.setItem(GH_SK,JSON.stringify(s));
+  gid('ghPublishBtn').style.display='inline-flex';
+  ghStatus('✅ Settings saved! Now click "Publish Now" to go live.','var(--green)');
+}
+
+function ghStatus(msg,color){
+  const el=gid('ghStatus');
+  el.style.display='block';
+  el.style.background=color==='var(--green)'?'rgba(16,185,129,.1)':'rgba(244,63,94,.1)';
+  el.style.border='1px solid '+(color==='var(--green)'?'rgba(16,185,129,.3)':'rgba(244,63,94,.3)');
+  el.style.color=color;
+  el.textContent=msg;
+}
+
+async function publishToGitHub(){
+  const s=JSON.parse(localStorage.getItem(GH_SK)||'{}');
+  if(!s.user||!s.repo||!s.token){ghStatus('❌ Please save your settings first.','var(--red)');return;}
+
+  const btn=gid('ghPublishBtn');
+  btn.textContent='⏳ Publishing...';
+  btn.disabled=true;
+  ghStatus('📤 Connecting to GitHub...','var(--cyan)');
+
+  try{
+    const filePath=s.path||'index.html';
+    const apiBase=`https://api.github.com/repos/${s.user}/${s.repo}/contents/${filePath}`;
+    // Bearer works for both classic tokens and fine-grained tokens
+    const headers={
+      'Authorization':'Bearer '+s.token,
+      'Content-Type':'application/json',
+      'Accept':'application/vnd.github+json',
+      'X-GitHub-Api-Version':'2022-11-28'
+    };
+
+    // Step 1: Get current file SHA
+    ghStatus('📥 Fetching current file info...','var(--cyan)');
+    let sha='';
+    const getRes=await fetch(apiBase,{headers});
+    if(getRes.ok){
+      const info=await getRes.json();sha=info.sha||'';
+    } else if(getRes.status===401){
+      throw new Error('401 — Bad token. Go to GitHub → Settings → Developer settings → Generate new token');
+    } else if(getRes.status===403){
+      throw new Error('403 — Token has no permission. Enable "repo" (classic) or "Contents:Write" (fine-grained)');
+    } else if(getRes.status===404){
+      sha='';
+    } else {
+      const e=await getRes.json().catch(()=>({}));
+      throw new Error('GET failed ('+getRes.status+'): '+(e.message||'check username & repo name'));
+    }
+
+    // Step 2: Build clean public HTML (no admin UI, no open modals)
+    ghStatus('🔨 Building clean HTML...','var(--cyan)');
+
+    // ── Close ALL open overlays/modals so they don't appear for visitors ──
+    document.querySelectorAll('.overlay.open').forEach(el=>el.classList.remove('open'));
+    document.querySelectorAll('.dl-ov.show').forEach(el=>el.classList.remove('show'));
+
+    // ── Remove admin hint divs ──
+    document.querySelectorAll('.__admin_hint__').forEach(el=>el.remove());
+
+    // ── Hide all admin UI buttons ──
+    document.querySelectorAll('.adm-add,.adm-edit,.card-acts').forEach(el=>{
+      el.setAttribute('data-pw',el.style.display||'');el.style.display='none';
+    });
+    const fab2=gid('adminFab');if(fab2)fab2.style.display='none';
+    const ab2=gid('adminBtn');if(ab2)ab2.style.display='none';
+
+    const b64data=btoa(encodeURIComponent(JSON.stringify(DATA)));
+    const div=document.getElementById('__pf_data__');
+    if(div)div.textContent=b64data;
+    const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+
+    // ── Restore admin UI after snapshot ──
+    document.querySelectorAll('.adm-add,.adm-edit,.card-acts').forEach(el=>{
+      el.style.display=el.getAttribute('data-pw')||'';el.removeAttribute('data-pw');
+    });
+    if(fab2)fab2.style.display='flex';
+    if(ab2)ab2.style.display='inline-block';
+    renderAdminUI();
+    // Re-open the publish modal so admin can see the result
+    openOv('ghOv');
+
+    // Step 3: Encode HTML to base64 safely (handles all unicode/emoji)
+    ghStatus('🔄 Encoding file...','var(--cyan)');
+    const uint8=new TextEncoder().encode(html);
+    const chunk=8192;let bin='';
+    for(let i=0;i<uint8.length;i+=chunk){
+      bin+=String.fromCharCode(...uint8.slice(i,Math.min(i+chunk,uint8.length)));
+    }
+    const htmlB64=btoa(bin);
+
+    // Step 4: PUT file to GitHub
+    ghStatus('🚀 Uploading to GitHub...','var(--cyan)');
+    const putRes=await fetch(apiBase,{
+      method:'PUT',headers,
+      body:JSON.stringify({
+        message:'Portfolio update — '+new Date().toLocaleString(),
+        content:htmlB64,
+        ...(sha?{sha}:{})
+      })
+    });
+
+    if(!putRes.ok){
+      const e=await putRes.json().catch(()=>({}));
+      console.error('GitHub PUT '+putRes.status,e);
+      throw new Error('Upload failed ('+putRes.status+'): '+(e.message||JSON.stringify(e)));
+    }
+
+    // ✅ Done
+    btn.textContent='✅ Published!';
+    const isUserPage=s.repo.toLowerCase()===s.user.toLowerCase()+'.github.io';
+    const siteUrl='https://'+s.user+'.github.io'+(isUserPage?'':'/'+s.repo);
+    ghStatus('🎉 Live! Updating in ~1 min → '+siteUrl,'var(--green)');
+    showToast('🎉 Published! Live for everyone in ~1 minute',5000);
+    setTimeout(()=>{btn.textContent='🌐 Publish Now';btn.disabled=false;},5000);
+
+  }catch(err){
+    console.error('Publish error:',err);
+    let msg=String(err.message||err);
+    if(msg.includes('401'))msg='❌ Bad token — generate a new one at GitHub → Settings → Developer settings';
+    else if(msg.includes('404'))msg='❌ Repo not found — username: "'+s.user+'" repo: "'+s.repo+'" — check spelling exactly';
+    else if(msg.includes('403'))msg='❌ No permission — token needs repo access (tick "repo" when creating token)';
+    else if(msg.includes('422'))msg='❌ GitHub rejected the file — try refreshing and publishing again';
+    else msg='❌ '+msg;
+    ghStatus(msg,'var(--red)');
+    btn.textContent='🌐 Publish Now';btn.disabled=false;
+    showToast('❌ Publish failed',3000);
+  }
+}
+
+/* ── SCROLL REVEAL ── */
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* ── CLOSE OVERLAY ON BACKDROP ── */
+document.querySelectorAll('.overlay').forEach(ov=>{
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');});
+});
+
+/* ── INIT ── */
+gid('fyear').textContent=new Date().getFullYear();
+load();renderAll();
+
+/* ── SECRET ADMIN URL DETECTION ── */
+(function(){
+  const path=window.location.pathname;
+  const hash=window.location.hash;
+  const isAdminURL=path.endsWith('/admin')||path.endsWith('/admin/')||hash==='#admin';
+  if(isAdminURL){
+    const btn=gid('adminBtn');
+    if(btn)btn.style.display='inline-block';
+    setTimeout(()=>{
+      const hint=document.createElement('div');
+      hint.className='__admin_hint__';
+      hint.style.cssText='position:fixed;top:70px;right:1.5rem;z-index:200;background:var(--card);border:1px solid var(--cyan);border-radius:8px;padding:.6rem 1rem;font-family:var(--ff-m);font-size:.7rem;color:var(--cyan);display:flex;align-items:center;gap:.5rem;box-shadow:0 4px 20px rgba(34,211,238,.15)';
+      hint.textContent='🔐 Admin access — click ⚙ Admin';
+      document.body.appendChild(hint);
+      setTimeout(()=>{hint.style.opacity='0';hint.style.transition='opacity .5s';setTimeout(()=>hint.remove(),500);},4000);
+    },600);
+  }
+})();
+</script>
+</body>
+</html>
